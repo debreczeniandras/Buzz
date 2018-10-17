@@ -31,7 +31,7 @@ abstract class AbstractClient
     /**
      * @param ResponseFactoryInterface|ResponseFactory $responseFactory
      */
-    public function __construct($responseFactory, array $options = [])
+    public function __construct($responseFactory = null, array $options = [])
     {
         if (!$responseFactory instanceof ResponseFactoryInterface && !$responseFactory instanceof ResponseFactory) {
             $this->responseFactory = new SlimMessageFactory();

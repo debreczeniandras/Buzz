@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Buzz;
 
 use Buzz\Client\BuzzClientInterface;
+use Buzz\Client\FileGetContents;
 use Buzz\Exception\ClientException;
 use Buzz\Exception\InvalidArgumentException;
 use Buzz\Exception\LogicException;
 use Buzz\Middleware\MiddlewareInterface;
+use Http\Message\MessageFactory\SlimMessageFactory;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -32,19 +34,15 @@ class Browser implements BuzzClientInterface
 
     /** @var ResponseInterface */
     private $lastResponse;
-
+    
     /**
      * @param BuzzClientInterface                    $client
      * @param RequestFactoryInterface|RequestFactory $requestFactory
      */
-    public function __construct(BuzzClientInterface $client, $requestFactory)
+    public function __construct(BuzzClientInterface $client = null, $requestFactory = null)
     {
-        if (!$requestFactory instanceof RequestFactoryInterface && !$requestFactory instanceof RequestFactory) {
-            throw new InvalidArgumentException('$requestFactory not a valid RequestFactory');
-        }
-
-        $this->client = $client;
-        $this->requestFactory = $requestFactory;
+        $this->client = $client ? : new FileGetContents();
+        $this->requestFactory = $requestFactory ? : new SlimMessageFactory();
     }
 
     public function get(string $url, array $headers = []): ResponseInterface
