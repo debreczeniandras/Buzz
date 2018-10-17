@@ -98,4 +98,61 @@ abstract class AbstractClient
         $resolver->setAllowedTypes('timeout', ['integer', 'float']);
         $resolver->setAllowedTypes('proxy', ['null', 'string']);
     }
+    
+    public function setIgnoreErrors($ignoreErrors)
+    {
+    }
+    
+    public function getIgnoreErrors()
+    {
+    }
+    
+    public function setMaxRedirects($maxRedirects)
+    {
+        $this->options->add(['max_redirects', $maxRedirects]);
+    }
+    
+    public function getMaxRedirects()
+    {
+        return $this->options->get('max_redirects');
+    }
+    
+    public function setTimeout($timeout)
+    {
+        $this->options->add(['timeout', $timeout]);
+    }
+    
+    public function getTimeout()
+    {
+        return $this->options->get('timeout');
+    }
+    
+    public function setVerifyPeer($verifyPeer)
+    {
+        $this->options->add(['verify', $verifyPeer]);
+    }
+    
+    public function getVerifyPeer()
+    {
+        return $this->options->get('verify');
+    }
+    
+    public function getVerifyHost()
+    {
+        $this->options->add(['verify', true]);
+    }
+    
+    public function setVerifyHost($verifyHost)
+    {
+        $this->options->add(['verify', $verifyHost]);
+    }
+    
+    public function setProxy($proxy)
+    {
+        $this->options->add(['proxy', $proxy]);
+    }
+    public function getProxy()
+    {
+        return $this->options->get('proxy');
+    }
 }
