@@ -6,6 +6,7 @@ namespace Buzz\Client;
 
 use Buzz\Configuration\ParameterBag;
 use Buzz\Exception\InvalidArgumentException;
+use Http\Message\MessageFactory\SlimMessageFactory;
 use Http\Message\ResponseFactory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +34,7 @@ abstract class AbstractClient
     public function __construct($responseFactory, array $options = [])
     {
         if (!$responseFactory instanceof ResponseFactoryInterface && !$responseFactory instanceof ResponseFactory) {
-            throw new InvalidArgumentException('$responseFactory not a valid ResponseFactory');
+            $this->responseFactory = new SlimMessageFactory();
         }
 
         $this->options = new ParameterBag();
