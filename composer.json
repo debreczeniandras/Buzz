@@ -24,7 +24,7 @@
         "php-http/httplug": "^1.1 || ^2.0@dev",
         "symfony/options-resolver": "^3.4 || ^4.0",
         "psr/http-factory": "^1.0",
-        "php-http/message": "^1.7"
+        "php-http/message": "^1.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.11",
