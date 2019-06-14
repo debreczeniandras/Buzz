@@ -33,13 +33,14 @@ abstract class AbstractClient
      */
     public function __construct($responseFactory = null, array $options = [])
     {
+        $this->responseFactory = $responseFactory;
+        
         if (!$responseFactory instanceof ResponseFactoryInterface && !$responseFactory instanceof ResponseFactory) {
             $this->responseFactory = new SlimMessageFactory();
         }
 
         $this->options = new ParameterBag();
         $this->options = $this->doValidateOptions($options);
-        $this->responseFactory = $responseFactory;
     }
 
     protected function getOptionsResolver(): OptionsResolver
